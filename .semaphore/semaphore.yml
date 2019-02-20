@@ -35,7 +35,6 @@ blocks:
             # remote repository.
             # See https://docs.semaphoreci.com/article/54-toolbox-reference#libcheckout
             - checkout
-            - sem-version php 7.3.0
             # Try and find a cached version of our /vendor dependencies folder.
             # Semaphore tries to find a partial match.
             # Read about caching: https://docs.semaphoreci.com/article/54-toolbox-reference#cache
@@ -62,7 +61,6 @@ blocks:
       prologue:
         commands:
           - checkout
-          - sem-version php 7.3.0
           - cache restore composer-$SEMAPHORE_GIT_BRANCH-$(checksum composer.lock),composer-$SEMAPHORE_GIT_BRANCH,composer-master
       jobs:
         - name: phpmd
@@ -85,7 +83,6 @@ blocks:
       - name: phpunit
         commands:
           - checkout
-          - sem-version php 7.3.0
           - cache restore composer-$SEMAPHORE_GIT_BRANCH-$(checksum composer.lock),composer-$SEMAPHORE_GIT_BRANCH,composer-master
           # Run the unit tests from the phpunit binary in vendor folder
           - ./vendor/bin/phpunit
@@ -95,8 +92,7 @@ blocks:
       jobs:
         - name: laravel dusk
           commands:
-            - checkout
-            - sem-version php 7.3.0            
+            - checkout          
             - cp .env.example .env
             # Create an empty .sqlite DB
             - touch database/database.sqlite
@@ -114,8 +110,7 @@ blocks:
       jobs:
         - name: sensiolabs
           commands:
-            - checkout
-            - sem-version php 7.3.0            
+            - checkout           
             # We clone the Security Checker repository, and cd into it.
             - git clone https://github.com/sensiolabs/security-checker.git
             - cd security-checker
