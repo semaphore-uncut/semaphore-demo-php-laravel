@@ -118,3 +118,7 @@ blocks:
             - composer install
             # Finally, run the check
             - php security-checker security:check ../composer.lock
+            
+promotions:
+  - name: Deploy to staging
+    pipeline_file: stg.yml
